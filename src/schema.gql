@@ -1,0 +1,289 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: String!
+  description: String!
+  content: String!
+  created_at: DateTime
+  updated_at: DateTime
+  user: User!
+  userId: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: String!
+  email: String!
+  password: String!
+  fullName: String!
+  phone: String!
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  posts: [Post!]
+}
+
+type Category {
+  id: String!
+  name: String!
+  description: String
+  created_at: DateTime
+  updated_at: DateTime
+  products: [Product!]
+}
+
+type Image {
+  id: String!
+  image_url: String!
+  created_at: DateTime
+  updated_at: DateTime
+  productId: String!
+  product: Product!
+}
+
+type Order {
+  id: String!
+  total: Float!
+  created_at: DateTime
+  updated_at: DateTime
+  status: Boolean
+  order_detail: [OrderDetail!]
+  customer: Customer!
+  customerId: String!
+}
+
+type OrderDetail {
+  id: String!
+  quantity: Int!
+  total: Float!
+  orderId: String!
+  order: Order!
+  product: Product!
+  productId: String!
+}
+
+type Product {
+  id: String!
+  name: String!
+  description: String!
+  price: Float!
+  sale_price: Float
+  featured: Boolean
+  best_seller: Boolean
+  thumbnail: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+  categoryId: String!
+  category: Category!
+  images: [Image!]
+  order_detail: [OrderDetail!]
+  comments: [Comment!]
+}
+
+type Comment {
+  id: String!
+  content: String!
+  star: Float!
+  created_at: DateTime
+  updated_at: DateTime
+  product: Product!
+  productId: String!
+  customer: Customer!
+  customerId: String!
+}
+
+type Customer {
+  id: String!
+  email: String!
+  password: String!
+  fullName: String
+  phone: String
+  address: String
+  avatar: String
+  created_at: DateTime
+  updated_at: DateTime
+  orders: [Order!]
+  comments: [Comment!]
+}
+
+type LoginCustomerResponse {
+  access_token: String!
+  customer: Customer!
+}
+
+type LoginUserResponse {
+  access_token: String!
+  user: User!
+}
+
+type Query {
+  users: [User!]!
+  user(id: String!): User!
+  customers: [Customer!]!
+  customer(id: String!): Customer!
+  categories: [Category!]!
+  category(id: String!): Category!
+  products: [Product!]!
+  product(id: String!): Product!
+  images: [Image!]!
+  image(id: String!): Image!
+  orders: [Order!]!
+  order(id: String!): Order!
+  getAllOrdersOfCustomer(customerId: String!): [Order!]!
+  orderDetail(id: String!): OrderDetail!
+  posts: [Post!]!
+  post(id: String!): Post!
+  comments: [Comment!]!
+  comment(id: String!): Comment!
+}
+
+type Mutation {
+  loginUser(loginUserInput: LoginUserInput!): LoginUserResponse!
+  signupUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  deleteUser(id: String!): String!
+  deleteCustomer(id: String!): String!
+  updateCustomerFromAdmin(updateCustomerInput: UpdateCustomerInput!): Customer!
+  signupCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  loginCustomer(loginCustomerInput: LoginCustomerInput!): LoginCustomerResponse!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  createCategory(createCategoryInput: CreateCategoryInput!): Category!
+  updateCategory(updateCategoryInput: UpdateCategoryInput!): Category!
+  deleteCategory(id: String!): Category!
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  deleteProduct(id: String!): Product!
+  createImage(createImageInput: CreateImageInput!): Image!
+  updateImage(updateImageInput: UpdateImageInput!): Image!
+  removeImage(id: String!): String!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  createPost(createPostInput: CreatePostInput!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  deletePost(id: String!): Post!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  deleteComment(id: String!): Comment!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+  fullName: String!
+  phone: String!
+  avatar: String
+}
+
+input UpdateUserInput {
+  id: String!
+  fullName: String
+  phone: String
+  avatar: String
+}
+
+input UpdateCustomerInput {
+  id: String!
+  fullName: String!
+  phone: String!
+  address: String!
+  avatar: String
+}
+
+input CreateCustomerInput {
+  email: String!
+  password: String!
+  fullName: String
+  phone: String
+  address: String
+  avatar: String
+}
+
+input LoginCustomerInput {
+  email: String!
+  password: String!
+}
+
+input CreateCategoryInput {
+  name: String!
+  description: String
+}
+
+input UpdateCategoryInput {
+  id: String!
+  name: String
+  description: String
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Float!
+  sale_price: Float
+  thumbnail: String!
+  categoryId: String!
+}
+
+input UpdateProductInput {
+  id: String!
+  name: String
+  description: String
+  price: Float
+  sale_price: Float
+  thumbnail: String
+  categoryId: String
+}
+
+input CreateImageInput {
+  image_url: String!
+  productId: String!
+}
+
+input UpdateImageInput {
+  id: String!
+  image_url: String!
+}
+
+input CreateOrderInput {
+  customerId: String!
+  order_detail: [CreateOrderDetailInput!]!
+}
+
+input CreateOrderDetailInput {
+  quantity: Float!
+  productId: String!
+  total: Float
+}
+
+input UpdateOrderInput {
+  id: String!
+  status: Boolean!
+}
+
+input CreatePostInput {
+  description: String!
+  content: String!
+  userId: String!
+}
+
+input UpdatePostInput {
+  id: String!
+  description: String
+  content: String
+}
+
+input CreateCommentInput {
+  content: String!
+  productId: String!
+  customerId: String!
+  star: Int!
+}
