@@ -29,15 +29,7 @@ export class FileService {
 
         // Set the configuration for your app
         // TODO: Replace with your app's config object
-        // const firebaseConfig = {
-        //     apiKey: process.env.FIREBASE_API_KEY,
-        //     authDomain: "webbanhang-nestjs.firebaseapp.com",
-        //     projectId: "webbanhang-nestjs",
-        //     storageBucket: "webbanhang-nestjs.appspot.com",
-        //     messagingSenderId: "930676648966",
-        //     appId: "1:930676648966:web:b6cc6c88c1d44729176787",
-        //     measurementId: "G-JL74GMS0BM"
-        // };
+
         const firebaseConfig = {
             apiKey: process.env.FIREBASE_API_KEY,
             authDomain: process.env.FIREBASE_AUTH_DOMAIN,
