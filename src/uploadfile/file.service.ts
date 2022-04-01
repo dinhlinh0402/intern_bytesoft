@@ -29,14 +29,23 @@ export class FileService {
 
         // Set the configuration for your app
         // TODO: Replace with your app's config object
+        // const firebaseConfig = {
+        //     apiKey: process.env.FIREBASE_API_KEY,
+        //     authDomain: "webbanhang-nestjs.firebaseapp.com",
+        //     projectId: "webbanhang-nestjs",
+        //     storageBucket: "webbanhang-nestjs.appspot.com",
+        //     messagingSenderId: "930676648966",
+        //     appId: "1:930676648966:web:b6cc6c88c1d44729176787",
+        //     measurementId: "G-JL74GMS0BM"
+        // };
         const firebaseConfig = {
-            apiKey: "AIzaSyCA9_flUwjWUMrSsKxGX3VjPEMhZhRiYpY",
-            authDomain: "webbanhang-nestjs.firebaseapp.com",
-            projectId: "webbanhang-nestjs",
-            storageBucket: "webbanhang-nestjs.appspot.com",
-            messagingSenderId: "930676648966",
-            appId: "1:930676648966:web:b6cc6c88c1d44729176787",
-            measurementId: "G-JL74GMS0BM"
+            apiKey: process.env.FIREBASE_API_KEY,
+            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.FIREBASE_PROJEC_ID,
+            storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.FIREBASE_APP_ID,
+            measurementId: process.env.FIREBASE_MEASUREMENT_ID
         };
         const firebaseApp = initializeApp(firebaseConfig);
 
