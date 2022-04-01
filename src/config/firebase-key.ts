@@ -1,0 +1,12 @@
+export const serviceAccount = {
+    type: "service_account",
+    project_id: "webbanhang-nestjs",
+    private_key_id: "2b79a1d0c6191fd9dc84fba911604735f35f2f4c",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCetfxRhvJQFON8\nGFFAu7IR8fPjb9KaTiCi/+2mlAlAwT9Gz7qY3VezPWuFvfvBilib2luPbVJhiRnj\nhVtSYNI3UT0iou/+pgT7CMhmNJOQLs17YigGXJeOiajKMR0FfHcvFpXIA/bFbCsR\npLYJX02smDImbm4fIBz/JUbRcUd1LUOqASQSGhQBu8oMsFPn8ksylGkLWn9A2mfr\nRV3s3osL73TUYT627kAo8dv8ZKU6QbW/ZIrMbblWSwJlpl1zSLF3xtScbocKT3mJ\nNreSE7q0iRtLKHz7ofBAQUN7ZK1Z254dbiD6aRdiKA7dFUolP17MuaieKAGWLMfB\ntyAVUKo/AgMBAAECggEAAQYGQaS5Y3zzkew+q0yBcJyJTs0PCcTkI2+S8BmWXkKv\nAkbeG6EHxXWQFjlu2Nyi9R12tNfh4gQRJRJYQZ27iQMwfftXwTuZ6NgI+UvUJC0X\nkf7pN5T366lTtOGZoeq1+Fhb4P2Qmf4BduDCgEly0am79WFM5/fo8FgMIrKBxMkn\nYhupsuM9KER0s6hesuy+F2eu5hoKUjecGnz6ZAumQvz/lugIFFZfojZx9BQeOmRW\nHdz1XHQmo0JnsUg4RVyGN1DOK7HiPrk21q4WmUaqknqqmm8P7DMPXbWf00CCXMIb\nmbCXxMLWvSz53J8YWk6ksbWtjWDq0V08IvjTCqWfMQKBgQDbQDIDTd8KBvRSUruO\nJ+tJ9WgLsuXyhoeCdu2HiLnaAkTJnGfxmlRoVoF2CxskFYs5zTQKS1SqotB1Km9N\nB1W8su2twg8CJQ/oTglkhKQ8r73PSnqZTu2vJr7gougfRUF2f8RRBi4IfkeJWlDM\n7EtMZO25KBMEemlnh05XtHgjpwKBgQC5UBd8olvVwXZXdZV4lI2ksFhM9Vvr2/LK\nL8g+h1OWM9m8koyImkiUz5zhDcAOKisYewrBRrK3KhB/IkpNyx68aSTIBbDm8wRD\nKOf2IXcLfdj0+wbbDjkM9OnbtvOBiQaAkxh250wA2qWaAw7aJqZvgg8CcbE6JIJU\ncNIviu33qQKBgEjNvk2+k+t+d67GbiU8ODMs3EnWM+kepuy5lRJGYoBz9GeGGjXt\n601iPEb4VSDcToj5DOjGLu0id1oQpzjK0LuCJs5l/BnYOLoI/7FzIh5MtRiaQK+b\nt+1LTmLFdZK8qoowzv2gsbR8SkDfzqjdZfuOICo1lmsMQufv1CHneWVNAoGAd8tc\nw4c5kr9Tv0oV7DMsNbCCBI4AdEJle2rUKgfVcx3lvc+G5a/HB9wGcD4xT3bXESZJ\nV5RaZ6nbrDQAkLWkEuxtiJiVOVcUBE5nVWdgy575J7U3Q1i4bLXOj+h/Fdf8yhVN\nFWCEc3Dk6ODdMw0VPrR2+39/sDR1xByC45UOLLECgYEAmLKI0LGpsuGkDFewRk5v\nz22gtlymaSwfbmI9PHqnt6eXKH2w9+JxBZO+RTXDxWDv+crctuzWGwqI2HjtFtOT\nFsBToIYYy4M7vnhHBdm5Vr2uxsu/xW7eHRBoMMj5DnA2Gd/GD8Toe1rtcA/vYPMb\nSfg8kWxgdqgleuuC5TTN+CY=\n-----END PRIVATE KEY-----\n",
+    client_email: "firebase-adminsdk-f2dpd@webbanhang-nestjs.iam.gserviceaccount.com",
+    client_id: "116234136569707917980",
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    token_uri: "https://oauth2.googleapis.com/token",
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-f2dpd%40webbanhang-nestjs.iam.gserviceaccount.com"
+}

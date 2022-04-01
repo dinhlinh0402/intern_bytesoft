@@ -28,16 +28,20 @@ export class ProductsService {
     return this.productRepository.save(createProduct)
   }
 
-  findAll() {
+  async findAll() {
     // return this.productRepository.find({
     //   relations: ['images', 'order_detail', 'comments']
     // });
-    return this.productRepository
+    const a = await this.productRepository
       .createQueryBuilder('product')
       .leftJoinAndSelect('product.images', 'image')
-      .leftJoinAndSelect('product.order_detail', 'order_detail')
-      .leftJoinAndSelect('product.comments', 'comments')
+      .leftJoinAndSelect('product.order_detail', 't')
+      .leftJoinAndSelect('product.comments', 'comment')
       .getMany()
+
+    console.log('data product: ', a);
+
+    return a
   }
 
   getCategory(categoryId: string) {
@@ -52,9 +56,9 @@ export class ProductsService {
       .createQueryBuilder('product')
       .leftJoinAndSelect('product.images', 'image')
       .leftJoinAndSelect('product.order_detail', 'order_detail')
-      .leftJoinAndSelect('product.comments', 'comments')
+      .leftJoinAndSelect('product.comments', 't')
       .where('product.id = :productId', { productId: id })
-      .orderBy('comments.created_at', 'DESC')
+      .orderBy('t.created_at', 'DESC')
       .getOne()
   }
 

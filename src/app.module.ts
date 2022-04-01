@@ -12,11 +12,13 @@ import { OrdersModule } from './orders/orders.module';
 import { OrderDetailModule } from './order-detail/order-detail.module';
 import { PostsModule } from './posts/posts.module';
 import { CommentsModule } from './comments/comments.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [GraphQLModule.forRoot({
     autoSchemaFile: join(process.cwd(), 'src/schema.gql')
   }),
+  ConfigModule.forRoot(),
   TypeOrmModule.forRoot(),
     UserModule,
     AuthModule,

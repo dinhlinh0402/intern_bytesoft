@@ -14,7 +14,8 @@ import { JwtCustomerStrategy } from './jwt-customer.strategy';
     UserModule,
     CustomersModule,
     JwtModule.register({
-      secret: 'secret-key'
+      secret: 'secret-key',
+      signOptions: { expiresIn: '1d' },
     })
   ],
   providers: [AuthResolver, AuthService, JwtUserStrategy, JwtCustomerStrategy]

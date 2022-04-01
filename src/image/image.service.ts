@@ -31,8 +31,38 @@ export class ImageService {
     return this.imageRepository.save(createImage)
   }
 
-  findAll() {
-    return this.imageRepository.find();
+  // async findAll() {
+  //   let a = await this.imageRepository.find();
+  //   console.log('data: ', a);
+
+  //   return a
+  // }
+
+  // left join: Lấy tất cả image, nếu image nào có productId thì trả về product{...} nếu ko có sẽ cho product: null
+  /* async findAll() {
+    const a = await this.imageRepository
+      .createQueryBuilder('img')
+      .leftJoinAndSelect('img.product', 'p')
+      .where('True')
+      .getMany()
+
+    console.log('dâta:', a);
+    return a
+
+  } */
+
+  // inner join: Chỉ lấy những cái image nào chứa productId(Hợp của image vs product)
+  async findAll() {
+    let a = await this.imageRepository
+      .createQueryBuilder('img')
+      // .innerJoinAndSelect('img.product', 'p')
+      .where('True')
+
+    // const 
+    let b = await a.innerJoin('img.product', 'p').getMany()
+
+    console.log('dâta:', b);
+    return b
   }
 
   findOne(id: string) {
