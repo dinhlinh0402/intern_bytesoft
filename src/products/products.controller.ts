@@ -1,6 +1,6 @@
-import { Controller, HttpException, HttpStatus, Post, Request, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, HttpException, HttpStatus, Post, Request, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Context } from '@nestjs/graphql';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { JwtUserAuthGuardRestApi } from 'src/auth/jwt-auth-restapi.guard';
@@ -17,7 +17,7 @@ export class ProductsController {
 
     @Post('/upload-thumbnail-product')
     @UseInterceptors(
-        FileInterceptor('image', {
+        FileInterceptor('thumbnail', {
             // storage: diskStorage({
             //     filename: (req, file, callback) => {
             //         console.log('File in filename: ', file);
@@ -107,4 +107,42 @@ export class ProductsController {
             urlVideo
         }
     }
+
+    // Array of file
+    @Post('/upload-images-product')
+    @UseInterceptors(FilesInterceptor('images'))
+    @UseGuards(JwtUserAuthGuardRestApi)
+    async uploadListImage(
+        @UploadedFiles() files: Array<Express.Multer.File>,
+        @Request() req
+    ) {
+        console.log(files);
+        const imageMimeType = [
+            'image/jpeg',
+            'image/png',
+            'image/gif',
+            'image/webp'
+        ];
+
+        for (const file of files) {
+            if (!imageMimeType.includes(file.mimetype)) {
+                throw new HttpException('Only image files are allowed!', HttpStatus.BAD_REQUEST)
+            }
+        }
+
+        const listUrl = await this.fileService.uploadMultiFile(req.user, files)
+        // console.log('list Url fomr product.controller: ', listUrl);
+        return listUrl;
+
+    }
+
+    // Multiple files
+    // @Post('test-multiple')
+    // @UseInterceptors(FileFieldsInterceptor([
+    //     { name: 'avatar', maxCount: 2 },
+    //     { name: 'background', maxCount: 1 },
+    // ]))
+    // uploadFile(@UploadedFiles() files: { avatar?: Express.Multer.File[], background?: Express.Multer.File[] }) {
+    //     console.log(files);
+    // }
 }

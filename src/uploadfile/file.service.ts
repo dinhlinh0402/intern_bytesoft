@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IFile } from "./file.dto";
+import { IFile, IFiles } from "./file.dto";
 // const admin = require("firebase-admin");
 
 // import { cert, initializeApp } from 'firebase-admin/app';
@@ -56,11 +56,10 @@ export class FileService {
         }
         const storageRef = ref(
             storage,
-            fileInfo.fieldname === 'image' ? `/products/${user.email}-${user.id}/product's images/${name}-${randomName}-${fileExtName}` : `/products/${user.email}-${user.id}/product's videos/${name}-${randomName}-${fileExtName}`
+            fileInfo.fieldname === 'thumbnail' ? `/products/${user.email}-${user.id}/product's images/thumbnail-${name}-${randomName}-${fileExtName}` : `/products/${user.email}-${user.id}/product's videos/${name}-${randomName}-${fileExtName}`
         )
 
         console.log(typeof fileInfo.buffer);
-
 
         const uploadTask = uploadBytesResumable(storageRef, fileInfo.buffer, metadata);
 
@@ -112,6 +111,81 @@ export class FileService {
                     });
                 }
             );
+        })
+    }
+
+    async uploadMultiFile(user: UserJwtDto, filesInfo: IFiles[]): Promise<any> {
+        // console.log('nameFolder: ' + nameFolder);
+        console.log('filesInfo: ' + filesInfo);
+
+
+        const firebaseConfig = {
+            apiKey: process.env.FIREBASE_API_KEY,
+            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+            projectId: process.env.FIREBASE_PROJEC_ID,
+            storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+            appId: process.env.FIREBASE_APP_ID,
+            measurementId: process.env.FIREBASE_MEASUREMENT_ID
+        };
+        const firebaseApp = initializeApp(firebaseConfig);
+
+        // Get a reference to the storage service, which is used to create references in your storage bucket
+        // const storage = getStorage(firebaseApp);
+        const storage = getStorage(firebaseApp, 'gs://webbanhang-nestjs.appspot.com');
+
+        return new Promise(async (resolve, reject) => {
+            const listUrl = [];
+            for (const file of filesInfo) {
+                const name = file.originalname.split('.')[0];
+                const fileExtName = extname(file.originalname);
+                // console.log('fileExtName', fileExtName);
+                const randomName = Math.floor(Date.now() / 1000)
+                const newName = `${name}-${randomName}-${fileExtName}`
+
+                const metadata = {
+                    contentType: file.mimetype
+                }
+
+                const storageRef = ref(
+                    storage,
+                    `/products/${user.email}-${user.id}/product's images/${name}-${randomName}-${fileExtName}`
+                )
+                //``
+                const uploadTask = uploadBytesResumable(storageRef, file.buffer, metadata);
+
+                uploadTask.on('state_changed',
+                    async (snapshot) => {
+                    },
+                    (error) => {
+                        console.log('upload file error: ', error);
+                    },
+                    async () => {
+                        // Upload completed successfully, now we can get the download URL
+                        console.log('đã đến');
+                        await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                            console.log('File available at', downloadURL)
+                            if (!downloadURL) {
+                                reject({
+                                    status: false,
+                                    message: 'Upload images failed!'
+                                })
+                            }
+                            return downloadURL
+                        }).then(data => {
+                            // console.log('data: ', data);
+                            listUrl.push(data)
+                            if (listUrl.length === filesInfo.length) {
+                                resolve({
+                                    status: true,
+                                    message: 'Upload images successfully!',
+                                    listUrl
+                                })
+                            }
+                        })
+                    }
+                );
+            }
         })
     }
 }
