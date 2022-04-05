@@ -9,7 +9,3 @@ export interface IFile {
     size: number;
     buffer: any;
 }
-
-export interface IFiles extends IFile {
-    newName?: string;
-}

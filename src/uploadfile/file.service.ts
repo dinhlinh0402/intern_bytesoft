@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { IFile, IFiles } from "./file.dto";
+import { IFile } from "./file.dto";
 // const admin = require("firebase-admin");
 
 // import { cert, initializeApp } from 'firebase-admin/app';
@@ -114,7 +114,7 @@ export class FileService {
         })
     }
 
-    async uploadMultiFile(user: UserJwtDto, filesInfo: IFiles[]): Promise<any> {
+    async uploadMultiFile(user: UserJwtDto, filesInfo: IFile[]): Promise<any> {
         // console.log('nameFolder: ' + nameFolder);
         console.log('filesInfo: ' + filesInfo);
 
