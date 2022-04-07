@@ -1,4 +1,5 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
+import { Image } from 'src/image/entities/image.entity';
 
 @InputType()
 export class CreateProductInput {
@@ -18,5 +19,11 @@ export class CreateProductInput {
   thumbnail: string
 
   @Field()
-  categoryId: string
+  categoryId: string;
+
+  @Field(() => [String], { nullable: true })
+  list_images?: [string]
+
+  @Field({ nullable: true })
+  video?: string;
 }

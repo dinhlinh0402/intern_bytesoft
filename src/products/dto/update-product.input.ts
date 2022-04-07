@@ -23,4 +23,10 @@ export class UpdateProductInput {
 
   @Field({ nullable: true })
   categoryId?: string
+
+  @Field(() => [String], { nullable: true })
+  list_images?: [string];
+
+  @Field({ nullable: true })
+  video?: string;
 }

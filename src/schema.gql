@@ -84,6 +84,7 @@ type Product {
   images: [Image!]
   order_detail: [OrderDetail!]
   comments: [Comment!]
+  video: String
 }
 
 type Comment {
@@ -231,6 +232,8 @@ input CreateProductInput {
   sale_price: Float
   thumbnail: String!
   categoryId: String!
+  list_images: [String!]
+  video: String
 }
 
 input UpdateProductInput {
@@ -241,6 +244,8 @@ input UpdateProductInput {
   sale_price: Float
   thumbnail: String
   categoryId: String
+  list_images: [String!]
+  video: String
 }
 
 input CreateImageInput {

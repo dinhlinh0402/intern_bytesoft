@@ -67,4 +67,8 @@ export class Product {
   @OneToMany(() => Comment, comments => comments.product)
   @Field(() => [Comment], { nullable: true })
   comments?: [Comment]
+
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  video?: string;
 } 
